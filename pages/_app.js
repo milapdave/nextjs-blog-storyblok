@@ -10,15 +10,19 @@ import HeaderMenu from '../components/HeaderMenu';
 import MenuLink from '../components/MenuLink';
 import ArticleSlider from '../components/ArticleSlider';
 import Buttons from '@/components/Buttons';
-import Article from '../components/Article'
+import SingleArticle from '../components/SingleArticle'
+import AllArticles from '../components/AllArticles'
+import Category from '@/components/Category';
 const components = {
   config: Config,
   layout: Layout,
   'featured-articles-slider': ArticleSlider,
-  'article-page': Article,
+  'article-page': SingleArticle,
+  'all-articles': AllArticles,
   "header_menu": HeaderMenu,
   "menu_link": MenuLink,
   "button": Buttons,
+  'category': Category,
   feature: Feature,
   grid: Grid,
   teaser: Teaser,

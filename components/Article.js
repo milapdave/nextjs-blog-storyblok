@@ -1,25 +1,24 @@
-import { render } from 'storyblok-rich-text-react-renderer';
- 
-const Article = ({ blok }) => {
-  return (
-    <section className="text-gray-600 body-font">
-      <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-        <img
-          className="  md:h-96 w-full mb-10 object-cover object-center rounded"
-          alt={blok.image.alt}
-          src={blok.image.filename}
-        />
-        <div className="text-center lg:w-2/3 w-full">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-            {blok.headline}
-          </h1>
-          <h1 className="title-font sm:text-3xl text-2xl mb-4 font-medium text-gray-600">
-            {blok.subheadline}
-          </h1>
-          <div className="mb-8 leading-relaxed text-justify">{render(blok.content)}</div>
+import { StoryblokComponent } from "@storyblok/react";
+import Link from "next/link";
+ import Image from "next/image";
+const ArticleTeaser = ({ article}) => {
+return (
+    <div className={`flex flex-col border border-opacity-50 shadow-sm`}>
+        <Image width={300} height={300} className="object-cover object-center w-full h-60" src={article.image.filename} alt={article.headline} />
+        <div className="flex flex-grow flex-col p-5">
+            <h1 className="mb-4 text-xl font-semibold tracking-tighter leading-tight h-14">
+                {article.headline}
+            </h1>
+            <div className="text-base leading-relaxed line-clamp-2 mb-4">
+                {article.teaser}
+            </div>
+            <div className="mt-auto">
+                <Link href={`/articles/${article.slug}`} className="inline-flex items-center mt-4 font-semibold border border-black px-5 py-2 hover:bg-black hover:text-white">
+                    Read More »
+                </Link>
+            </div>
         </div>
-      </div>
-    </section>
-  );
+    </div>
+)
 };
-export default Article;
+export default ArticleTeaser;
