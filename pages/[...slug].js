@@ -17,15 +17,12 @@ export default function Home({story }) {
   )
 }
 
-export async function getStaticProps() {
-  // home is the default slug for the homepage in Storyblok
-  let slug = "home";
- 
+export async function getStaticProps({ params }) {
+   let slug = params.slug ? params.slug.join("/") : "home";
   // load the draft version
   let sbParams = {
     version: "draft", // or 'published'
     resolve_links: "url",
-    resolve_relations: ["featured-articles-slider.articles"],
   };
  
   const storyblokApi = getStoryblokApi();
@@ -40,3 +37,27 @@ export async function getStaticProps() {
     revalidate: 3600, // revalidate every hour
   };
 }
+
+export async function getStaticPaths() {
+    const storyblokApi = getStoryblokApi();
+    let { data } = await storyblokApi.get("cdn/links/" ,{
+      version: 'draft'
+    });
+   
+    let paths = [];
+    Object.keys(data.links).forEach((linkKey) => {
+      if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home") {
+        return;
+      }
+   
+      const slug = data.links[linkKey].slug;
+      let splittedSlug = slug.split("/");
+   
+      paths.push({ params: { slug: splittedSlug } });
+    });
+   
+    return {
+      paths: paths,
+      fallback: false,
+    };
+  }
