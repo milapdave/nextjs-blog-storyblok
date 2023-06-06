@@ -10,7 +10,7 @@ const Config = ({blok}) => {
                  Logo
             </Link>
           </div>
-          {blok.content.header_menu.map((nestedBlok) => (
+          {blok?.content?.header_menu.map((nestedBlok) => (
             <StoryblokComponent className='' blok={nestedBlok} key={nestedBlok._uid} />
           ))}
         </div>
