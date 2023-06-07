@@ -11,8 +11,10 @@ const RedHatDisplay = Red_Hat_Display({ subsets: ['latin'] })
 export default function Home({story }) {
   story = useStoryblokState(story);
   return (
-      <main  className={RedHatDisplay.className}>
-        <StoryblokComponent blok={story.content} />
+      <main className={RedHatDisplay.className}>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6'>
+          <StoryblokComponent blok={story.content} />
+        </div>
       </main>
   )
 }
