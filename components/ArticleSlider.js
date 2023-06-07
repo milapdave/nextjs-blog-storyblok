@@ -27,7 +27,7 @@ const PopularArtices = ({ blok }) => {
         className="slider-container"
         {...storyblokEditable(blok)}
       >
-        <div className={`relative h-screen max-h-[700px] overflow-hidden`}>
+        <div className={`relative h-screen md:max-h-[700px]  overflow-hidden`}>
           {blok.articles.map((article, index) => {
             article.content.slug = article.slug
             return (
